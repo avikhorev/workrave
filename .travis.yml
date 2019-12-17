@@ -67,7 +67,7 @@ stage_build_docker: &stage_build_docker
       docker run --rm \
           -v "$TRAVIS_BUILD_DIR:/workspace/source" \
           `printenv | grep -E '^(CONF_ENABLE|CONF_DISABLE||CONF_FLAGS|CONF_GTK_VER|CONFIGURATION|DOCKER_IMAGE|DISTCHECK|TRAVIS_TAG|TRAVIS_BUILD_DIR|TRAVIS_BUILD_NUMBER|TRAVIS_JOB_NUMBER|TRAVIS_REPO_SLUG|TRAVIS_OS_NAME|TRAVIS_BRANCH|WORKRAVE_.*)=' | sed  -e 's/^/-e/g' ` \
-          avikhorev/workrave-build:${DOCKER_IMAGE} \
+          rcaelers/workrave-build:${DOCKER_IMAGE} \
           sh -c "/workspace/source/build/travis/build.sh"
     else
        build/travis/build.sh
@@ -111,7 +111,7 @@ stage_deploy_ppa: &stage_deploy_ppa
       docker run --rm \
           -v "$TRAVIS_BUILD_DIR:/workspace/source" \
           -e TRAVIS_TAG=${TRAVIS_TAG} \
-          avikhorev/workrave-build:${DOCKER_IMAGE} \
+          rcaelers/workrave-build:${DOCKER_IMAGE} \
           sh -c "/workspace/source/build/travis/ppa.sh"
     else
        build/travis/ppa.sh
